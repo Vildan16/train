@@ -13,24 +13,20 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class Train extends AbstractEntity {
     @NotBlank
-    private String title = "";
-
-    @Nullable
-    public List<Crew> getCrews() {
-        return crews;
-    }
+    private String title;
 
     @NotNull
-    private int passage = 0;
+    private int trainNumber = 0;
 
     @OneToMany(mappedBy = "train")
     @Nullable
-    private List<Crew> crews = new LinkedList<>();
+    private List<Crew> crewMembers = new LinkedList<>();
 
     @Override
     public String toString() {
-        return "[" + passage + "]" + " " + title;
+        return "[" + trainNumber + "]" + " " + title;
     }
+
     public String getTitle() {
         return title;
     }
@@ -39,15 +35,20 @@ public class Train extends AbstractEntity {
         this.title = title;
     }
 
-    public int getPassage() {
-        return passage;
+    public int getTrainNumber() {
+        return trainNumber;
     }
 
-    public void setPassage(int passage) {
-        this.passage = passage;
+    public void setTrainNumber(int trainNumber) {
+        this.trainNumber = trainNumber;
     }
 
-    public void setCrews(@Nullable List<Crew> crews) {
-        this.crews = crews;
+    @Nullable
+    public List<Crew> getCrewMembers() {
+        return crewMembers;
+    }
+
+    public void setCrewMembers(@Nullable List<Crew> crewMembers) {
+        this.crewMembers = crewMembers;
     }
 }

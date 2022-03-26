@@ -9,9 +9,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface CrewRepository extends JpaRepository<Crew, Long> {
+
     @Query("select c from Crew c " +
             "where lower(c.firstName) like lower(concat('%', :searchTerm, '%')) " +
-            "or lower(c.lastName) like lower(concat('%', :searchTerm, '%'))")
+            "or lower(c.lastName) like lower(concat('%', :searchTerm, '%'))" +
+            "or lower(c.thirdName) like lower(concat('%', :searchTerm, '%'))")
     List<Crew> search(@Param("searchTerm") String searchTerm);
 }
 

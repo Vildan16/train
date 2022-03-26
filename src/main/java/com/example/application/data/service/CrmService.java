@@ -10,22 +10,19 @@ import java.util.List;
 
 @Service
 public class CrmService {
-
     private final CrewRepository crewRepository;
     private final TrainRepository trainRepository;
 
-    public CrmService(CrewRepository crewRepository,
-                      TrainRepository trainRepository) {
+    public CrmService(CrewRepository crewRepository, TrainRepository trainRepository) {
         this.crewRepository = crewRepository;
         this.trainRepository = trainRepository;
     }
 
-    public List<Crew> findAllCrew(String stringFilter) {
-        if (stringFilter == null || stringFilter.isEmpty()) {
+    public List<Crew> findAllCrew(String filterText) {
+        if (filterText == null || filterText.isEmpty())
             return crewRepository.findAll();
-        } else {
-            return crewRepository.search(stringFilter);
-        }
+        else
+            return crewRepository.search(filterText);
     }
 
     public long countCrew() {
@@ -33,18 +30,22 @@ public class CrmService {
     }
 
     public void deleteCrew(Crew crew) {
+        if (crew == null) {
+            System.err.println("[delete] Crew is null.");
+            return;
+        }
         crewRepository.delete(crew);
     }
 
-    public void saveContact(Crew crew) {
+    public void saveCrew(Crew crew) {
         if (crew == null) {
-            System.err.println("Contact is null. Are you sure you have connected your form to the application?");
+            System.err.println("[save] Crew is null.");
             return;
         }
         crewRepository.save(crew);
     }
 
-    public List<Train> findAllTrains() {
+    public List<Train> findAllTrain() {
         return trainRepository.findAll();
     }
 

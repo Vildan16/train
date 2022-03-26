@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -20,20 +19,16 @@ public class Crew extends AbstractEntity {
     @NotEmpty
     private String lastName = "";
 
-    private String patronymic = "";
+    @NotEmpty
+    private String thirdName = "";
 
     private Long amount = 0L;
 
+
     @ManyToOne
     @JoinColumn(name = "train_id")
-    @NotNull
     @JsonIgnoreProperties({"crews"})
     private Train train;
-
-    @Override
-    public String toString() {
-        return firstName + " " + lastName + " " + patronymic;
-    }
 
     public String getFirstName() {
         return firstName;
@@ -47,14 +42,16 @@ public class Crew extends AbstractEntity {
         return lastName;
     }
 
-
-
-    public String getPatronymic() {
-        return patronymic;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public void setPatronymic(String patronymic) {
-        this.patronymic = patronymic;
+    public String getThirdName() {
+        return thirdName;
+    }
+
+    public void setThirdName(String thirdName) {
+        this.thirdName = thirdName;
     }
 
     public Long getAmount() {
@@ -64,5 +61,20 @@ public class Crew extends AbstractEntity {
     public void setAmount(Long amount) {
         this.amount = amount;
     }
+
+    public Train getTrain() {
+        return train;
+    }
+
+    public void setTrain(Train train) {
+        this.train = train;
+    }
+
+    @Override
+    public String toString() {
+        return firstName + " " + lastName + " " + thirdName;
+    }
+
+
 }
 
