@@ -1,9 +1,9 @@
 package com.example.application.data.repository;
 
-import com.example.application.data.entity.Company;
+import com.example.application.data.entity.Train;
 import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface CompanyRepository extends JpaRepository<Company, UUID> {
+public interface TrainRepository extends JpaRepository<Train, UUID> {
 
 }
