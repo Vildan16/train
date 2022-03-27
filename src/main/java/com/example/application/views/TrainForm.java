@@ -1,7 +1,6 @@
 package com.example.application.views;
 
 import com.example.application.data.entity.Crew;
-import com.example.application.data.entity.Passport;
 import com.example.application.data.entity.Train;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentEvent;
@@ -12,7 +11,6 @@ import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-import com.vaadin.flow.component.textfield.EmailField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.data.binder.Binder;
@@ -21,37 +19,29 @@ import com.vaadin.flow.shared.Registration;
 
 import java.util.List;
 
-public class CrewForm extends FormLayout {
-    Binder<Crew> binder = new BeanValidationBinder<>(Crew.class);
+public class TrainForm extends FormLayout {
+    Binder<Train> binder = new BeanValidationBinder<>(Train.class);
 
-    TextField firstName = new TextField("Имя");
-    TextField lastName = new TextField("Фамилия");
-    TextField thirdName = new TextField("Отчество");
-    ComboBox<Passport> passport = new ComboBox<>("Паспорт");
-    ComboBox<Train> train = new ComboBox<>("Поезд");
+    TextField title = new TextField("Название");
+    TextField trainNumber = new TextField("Номер");
+    ComboBox<Crew> pilot = new ComboBox<>("Машинист");
 
     Button saveButton = new Button("Сохранить");
     Button deleteButton = new Button("Удалить");
     Button cancelButton = new Button("Отмена");
-    private Crew crew;
+    private Train train;
 
-    public CrewForm(List<Train> trains, List<Passport> passports) {
-        addClassName("crew-form");
+    public TrainForm(List<Crew> pilots) {
 
         binder.bindInstanceFields(this);
 
-        train.setItems(trains);
-        train.setItemLabelGenerator(Train::getTitle);
-
-        passport.setItems(passports);
-        passport.setItemLabelGenerator(Passport::getNumber);
+        pilot.setItems(pilots);
+        pilot.setItemLabelGenerator(Crew::getLastName);
 
         add(
-                firstName,
-                lastName,
-                thirdName,
-                train,
-                passport,
+                title,
+                trainNumber,
+                pilot,
                 createButtonLayout()
         );
     }
@@ -65,54 +55,54 @@ public class CrewForm extends FormLayout {
         cancelButton.addClickShortcut(Key.ESCAPE);
 
         saveButton.addClickListener(event -> validateAndSave());
-        deleteButton.addClickListener(event -> fireEvent(new DeleteEvent(this, crew)));
+        deleteButton.addClickListener(event -> fireEvent(new DeleteEvent(this, train)));
         cancelButton.addClickListener(event -> fireEvent(new CloseEvent(this)));
         return new HorizontalLayout(saveButton, deleteButton, cancelButton);
     }
 
     private void validateAndSave() {
         try {
-            binder.writeBean(crew);
-            fireEvent(new SaveEvent(this, crew));
+            binder.writeBean(train);
+            fireEvent(new SaveEvent(this, train));
         } catch (ValidationException e) {
             e.printStackTrace();
         }
     }
 
-    public void setCrew(Crew crew) {
-        this.crew = crew;
-        binder.readBean(crew);
+    public void setTrain(Train train) {
+        this.train = train;
+        binder.readBean(train);
     }
 
     // Events
-    public static abstract class CrewFormEvent extends ComponentEvent<CrewForm> {
-        private Crew crew;
+    public static abstract class TrainFormEvent extends ComponentEvent<TrainForm> {
+        private Train train;
 
-        protected CrewFormEvent(CrewForm source, Crew crew) {
+        protected TrainFormEvent(TrainForm source, Train train) {
             super(source, false);
-            this.crew = crew;
+            this.train = train;
         }
 
-        public Crew getCrew() {
-            return crew;
-        }
-    }
-
-    public static class SaveEvent extends CrewFormEvent {
-        SaveEvent(CrewForm source, Crew crew) {
-            super(source, crew);
+        public Train getTrain() {
+            return train;
         }
     }
 
-    public static class DeleteEvent extends CrewFormEvent {
-        DeleteEvent(CrewForm source, Crew crew) {
-            super(source, crew);
+    public static class SaveEvent extends TrainFormEvent {
+        SaveEvent(TrainForm source, Train train) {
+            super(source, train);
+        }
+    }
+
+    public static class DeleteEvent extends TrainFormEvent {
+        DeleteEvent(TrainForm source, Train train) {
+            super(source, train);
         }
 
     }
 
-    public static class CloseEvent extends CrewFormEvent {
-        CloseEvent(CrewForm source) {
+    public static class CloseEvent extends TrainFormEvent {
+        CloseEvent(TrainForm source) {
             super(source, null);
         }
     }

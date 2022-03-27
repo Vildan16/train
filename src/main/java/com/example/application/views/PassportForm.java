@@ -10,9 +10,9 @@ import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
+import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-import com.vaadin.flow.component.textfield.EmailField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.data.binder.Binder;
@@ -21,37 +21,32 @@ import com.vaadin.flow.shared.Registration;
 
 import java.util.List;
 
-public class CrewForm extends FormLayout {
-    Binder<Crew> binder = new BeanValidationBinder<>(Crew.class);
+public class PassportForm extends FormLayout {
+    Binder<Passport> binder = new BeanValidationBinder<>(Passport.class);
 
     TextField firstName = new TextField("Имя");
     TextField lastName = new TextField("Фамилия");
     TextField thirdName = new TextField("Отчество");
-    ComboBox<Passport> passport = new ComboBox<>("Паспорт");
-    ComboBox<Train> train = new ComboBox<>("Поезд");
+    TextField number = new TextField("Номер");
+    DatePicker date = new DatePicker("Дата выдачи");
+    TextField region = new TextField("Место выдачи");
 
     Button saveButton = new Button("Сохранить");
     Button deleteButton = new Button("Удалить");
     Button cancelButton = new Button("Отмена");
-    private Crew crew;
+    private Passport passport;
 
-    public CrewForm(List<Train> trains, List<Passport> passports) {
-        addClassName("crew-form");
+    public PassportForm(List<Crew> owners) {
 
         binder.bindInstanceFields(this);
-
-        train.setItems(trains);
-        train.setItemLabelGenerator(Train::getTitle);
-
-        passport.setItems(passports);
-        passport.setItemLabelGenerator(Passport::getNumber);
 
         add(
                 firstName,
                 lastName,
                 thirdName,
-                train,
-                passport,
+                number,
+                date,
+                region,
                 createButtonLayout()
         );
     }
@@ -65,54 +60,54 @@ public class CrewForm extends FormLayout {
         cancelButton.addClickShortcut(Key.ESCAPE);
 
         saveButton.addClickListener(event -> validateAndSave());
-        deleteButton.addClickListener(event -> fireEvent(new DeleteEvent(this, crew)));
-        cancelButton.addClickListener(event -> fireEvent(new CloseEvent(this)));
+        deleteButton.addClickListener(event -> fireEvent(new PassportForm.DeleteEvent(this, passport)));
+        cancelButton.addClickListener(event -> fireEvent(new PassportForm.CloseEvent(this)));
         return new HorizontalLayout(saveButton, deleteButton, cancelButton);
     }
 
     private void validateAndSave() {
         try {
-            binder.writeBean(crew);
-            fireEvent(new SaveEvent(this, crew));
+            binder.writeBean(passport);
+            fireEvent(new PassportForm.SaveEvent(this, passport));
         } catch (ValidationException e) {
             e.printStackTrace();
         }
     }
 
-    public void setCrew(Crew crew) {
-        this.crew = crew;
-        binder.readBean(crew);
+    public void setPassport(Passport passport) {
+        this.passport = passport;
+        binder.readBean(passport);
     }
 
     // Events
-    public static abstract class CrewFormEvent extends ComponentEvent<CrewForm> {
-        private Crew crew;
+    public static abstract class PassportFormEvent extends ComponentEvent<PassportForm> {
+        private Passport passport;
 
-        protected CrewFormEvent(CrewForm source, Crew crew) {
+        protected PassportFormEvent(PassportForm source, Passport passport) {
             super(source, false);
-            this.crew = crew;
+            this.passport = passport;
         }
 
-        public Crew getCrew() {
-            return crew;
-        }
-    }
-
-    public static class SaveEvent extends CrewFormEvent {
-        SaveEvent(CrewForm source, Crew crew) {
-            super(source, crew);
+        public Passport getPassport() {
+            return passport;
         }
     }
 
-    public static class DeleteEvent extends CrewFormEvent {
-        DeleteEvent(CrewForm source, Crew crew) {
-            super(source, crew);
+    public static class SaveEvent extends PassportForm.PassportFormEvent {
+        SaveEvent(PassportForm source, Passport passport) {
+            super(source, passport);
+        }
+    }
+
+    public static class DeleteEvent extends PassportForm.PassportFormEvent {
+        DeleteEvent(PassportForm source, Passport passport) {
+            super(source, passport);
         }
 
     }
 
-    public static class CloseEvent extends CrewFormEvent {
-        CloseEvent(CrewForm source) {
+    public static class CloseEvent extends PassportForm.PassportFormEvent {
+        CloseEvent(PassportForm source) {
             super(source, null);
         }
     }
@@ -122,3 +117,4 @@ public class CrewForm extends FormLayout {
         return getEventBus().addListener(eventType, listener);
     }
 }
+

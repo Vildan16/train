@@ -32,10 +32,6 @@ public class Application extends SpringBootServletInitializer implements AppShel
     @Bean
     public CommandLineRunner demo(TrainRepository trainRepository) {
         return (args) -> {
-            // save a few customers
-            trainRepository.save(new Train("Поезд1", 1));
-            trainRepository.save(new Train("Поезд2", 2));
-            trainRepository.save(new Train("Поезд3", 3));
 
         };
     }

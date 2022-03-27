@@ -34,9 +34,10 @@ public class MainLayout extends AppLayout {
     private Tabs getTabs() {
         Tabs tabs = new Tabs();
         tabs.add(
-                createTab(VaadinIcon.TRAIN, "Поезда", TrainsView.class),
+                createTab(VaadinIcon.TRAIN, "Поезда", TrainView.class),
                 createTab(VaadinIcon.CART, "Билеты", TicketView.class),
-                createTab(VaadinIcon.USERS, "Экипаж", CrewView.class)
+                createTab(VaadinIcon.USERS, "Экипаж", CrewView.class),
+                createTab(VaadinIcon.FILE, "Документы", PassportView.class)
         );
         tabs.setOrientation(Tabs.Orientation.VERTICAL);
         return tabs;

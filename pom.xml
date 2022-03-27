@@ -140,6 +140,10 @@
             <version>5.0.3</version>
             <scope>test</scope>
         </dependency>
+            <dependency>
+                <groupId>org.postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+            </dependency>
     </dependencies>
 
     <build>
@@ -199,6 +203,7 @@
                         </configuration>
                     </plugin>
                 </plugins>
+
             </build>
         </profile>
 

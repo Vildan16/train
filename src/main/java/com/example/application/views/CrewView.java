@@ -61,7 +61,7 @@ public class CrewView extends VerticalLayout {
     }
 
     private void configureForm() {
-        crewForm = new CrewForm(service.findAllTrain());
+        crewForm = new CrewForm(service.findAllTrain(), service.findAllPassport());
         crewForm.setWidth("30em");
 
         crewForm.addListener(CrewForm.SaveEvent.class, this::saveCrew);

@@ -2,20 +2,18 @@ package com.example.application.data.entity;
 
 import com.example.application.data.AbstractEntity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.lang.Nullable;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.LinkedList;
-
+import java.util.List;
 
 @Entity
-public class Crew extends AbstractEntity {
-
+public class Passport extends AbstractEntity {
     @NotEmpty
     private String firstName = "";
 
@@ -25,18 +23,17 @@ public class Crew extends AbstractEntity {
     @NotEmpty
     private String thirdName = "";
 
-    private Long amount = 0L;
+    @NotEmpty
+    private String number = "";
 
+    @Column(columnDefinition = "DATE")
+    private LocalDate date;
 
-    @ManyToOne
-    @JoinColumn(name = "train_id")
-    @JsonIgnoreProperties({"crews"})
-    @Nullable
-    private Train train;
+    @NotEmpty
+    private String region;
 
-    @OneToOne
-    @JoinColumn(name = "pasport_id")
-    private Passport passport;
+    @OneToOne(mappedBy = "passport")
+    private Crew owner;
 
     public String getFirstName() {
         return firstName;
@@ -62,27 +59,35 @@ public class Crew extends AbstractEntity {
         this.thirdName = thirdName;
     }
 
-    public Long getAmount() {
-        return amount;
+    public String getNumber() {
+        return number;
     }
 
-    public void setAmount(Long amount) {
-        this.amount = amount;
+    public void setNumber(String number) {
+        this.number = number;
     }
 
-    public Train getTrain() {
-        return train;
+    public LocalDate getDate() {
+        return date;
     }
 
-    public void setTrain(Train train) {
-        this.train = train;
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
-    @Override
-    public String toString() {
-        return firstName + " " + lastName + " " + thirdName;
+    public String getRegion() {
+        return region;
     }
 
+    public void setRegion(String region) {
+        this.region = region;
+    }
 
+    public Crew getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Crew owner) {
+        this.owner = owner;
+    }
 }
-

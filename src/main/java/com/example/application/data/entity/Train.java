@@ -16,11 +16,15 @@ public class Train extends AbstractEntity {
     private String title;
 
     @NotNull
-    private int trainNumber = 0;
+    private String trainNumber = "";
 
     @OneToMany(mappedBy = "train")
-    @Nullable
     private List<Crew> crewMembers = new LinkedList<>();
+
+    @OneToOne(orphanRemoval=true)
+    @JoinColumn(name = "crew_id")
+    @Nullable
+    private Crew pilot;
 
     @Override
     public String toString() {
@@ -35,11 +39,11 @@ public class Train extends AbstractEntity {
         this.title = title;
     }
 
-    public int getTrainNumber() {
+    public String getTrainNumber() {
         return trainNumber;
     }
 
-    public void setTrainNumber(int trainNumber) {
+    public void setTrainNumber(String trainNumber) {
         this.trainNumber = trainNumber;
     }
 
@@ -52,10 +56,19 @@ public class Train extends AbstractEntity {
         this.crewMembers = crewMembers;
     }
 
+    @Nullable
+    public Crew getPilot() {
+        return pilot;
+    }
+
+    public void setPilot(@Nullable Crew pilot) {
+        this.pilot = pilot;
+    }
+
     public Train() {
     }
 
-    public Train(String title, int trainNumber) {
+    public Train(String title, String trainNumber) {
         this.title = title;
         this.trainNumber = trainNumber;
     }
