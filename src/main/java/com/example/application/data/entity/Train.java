@@ -51,4 +51,12 @@ public class Train extends AbstractEntity {
     public void setCrewMembers(@Nullable List<Crew> crewMembers) {
         this.crewMembers = crewMembers;
     }
+
+    public Train() {
+    }
+
+    public Train(String title, int trainNumber) {
+        this.title = title;
+        this.trainNumber = trainNumber;
+    }
 }
