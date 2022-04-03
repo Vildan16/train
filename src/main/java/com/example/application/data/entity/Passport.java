@@ -32,8 +32,8 @@ public class Passport extends AbstractEntity {
     @NotEmpty
     private String region;
 
-    @OneToOne(mappedBy = "passport")
-    private Crew owner;
+//    @OneToOne(mappedBy = "passport")
+//    private Crew owner;
 
     public String getFirstName() {
         return firstName;
@@ -83,11 +83,11 @@ public class Passport extends AbstractEntity {
         this.region = region;
     }
 
-    public Crew getOwner() {
-        return owner;
-    }
-
-    public void setOwner(Crew owner) {
-        this.owner = owner;
-    }
+//    public Crew getOwner() {
+//        return owner;
+//    }
+//
+//    public void setOwner(Crew owner) {
+//        this.owner = owner;
+//    }
 }

@@ -108,7 +108,7 @@ public class CrewView extends VerticalLayout {
         grid.getColumns().get(0).setHeader("Имя");
         grid.getColumns().get(1).setHeader("Фамилия");
         grid.getColumns().get(2).setHeader("Отчество");
-        grid.addColumn(crew -> crew.getTrain().getTitle()).setHeader("Поезд");
+        grid.addColumn(crew -> crew.getTrain() == null ? "": crew.getTrain().getTitle()).setHeader("Поезд");
         grid.getColumns().forEach(col -> col.setAutoWidth(true));
 
         grid.asSingleSelect().addValueChangeListener(e -> editCrew(e.getValue()));

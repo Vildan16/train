@@ -2,11 +2,12 @@ package com.example.application.data.service;
 
 import com.example.application.data.entity.Crew;
 import com.example.application.data.entity.Passport;
+import com.example.application.data.entity.Ticket;
 import com.example.application.data.entity.Train;
 import com.example.application.data.repository.CrewRepository;
 import com.example.application.data.repository.PassportRepository;
+import com.example.application.data.repository.TicketRepository;
 import com.example.application.data.repository.TrainRepository;
-import com.example.application.views.PassportForm;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,11 +17,13 @@ public class CrmService {
     private final CrewRepository crewRepository;
     private final TrainRepository trainRepository;
     private final PassportRepository passportRepository;
+    private final TicketRepository ticketRepository;
 
-    public CrmService(CrewRepository crewRepository, TrainRepository trainRepository, PassportRepository passportRepository) {
+    public CrmService(CrewRepository crewRepository, TrainRepository trainRepository, PassportRepository passportRepository, TicketRepository ticketRepository) {
         this.crewRepository = crewRepository;
         this.trainRepository = trainRepository;
         this.passportRepository = passportRepository;
+        this.ticketRepository = ticketRepository;
     }
 
     public List<Crew> findAllCrew(String filterText) {
@@ -53,8 +56,6 @@ public class CrmService {
             System.err.println("[delete] Crew is null.");
             return;
         }
-        if (crew.getTrain().getPilot().equals(crew))
-            crew.getTrain().setPilot(null);
         crewRepository.delete(crew);
     }
 
@@ -106,6 +107,9 @@ public class CrmService {
     }
     public List<Passport> findAllPassport() {
         return passportRepository.findAll();
+    }
+    public List<Ticket> findAllTicket() {
+        return ticketRepository.findAll();
     }
 
 }

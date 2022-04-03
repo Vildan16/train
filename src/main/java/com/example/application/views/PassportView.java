@@ -105,11 +105,6 @@ class PassportView extends VerticalLayout {
         grid.getColumns().get(3).setHeader("Номер");
         grid.getColumns().get(4).setHeader("Дата выдачи");
         grid.getColumns().get(5).setHeader("Кем выдан");
-        grid.addColumn(passport -> {
-            if (passport.getOwner() == null)
-                return "";
-            return passport.getOwner().getLastName();
-        }).setHeader("Владелец");
         grid.getColumns().forEach(col -> col.setAutoWidth(true));
 
         grid.asSingleSelect().addValueChangeListener(e -> editPassport(e.getValue()));
