@@ -1,13 +1,7 @@
 package com.example.application.data.service;
 
-import com.example.application.data.entity.Crew;
-import com.example.application.data.entity.Passport;
-import com.example.application.data.entity.Ticket;
-import com.example.application.data.entity.Train;
-import com.example.application.data.repository.CrewRepository;
-import com.example.application.data.repository.PassportRepository;
-import com.example.application.data.repository.TicketRepository;
-import com.example.application.data.repository.TrainRepository;
+import com.example.application.data.entity.*;
+import com.example.application.data.repository.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,12 +12,14 @@ public class CrmService {
     private final TrainRepository trainRepository;
     private final PassportRepository passportRepository;
     private final TicketRepository ticketRepository;
+    private final RaceRepository raceRepository;
 
-    public CrmService(CrewRepository crewRepository, TrainRepository trainRepository, PassportRepository passportRepository, TicketRepository ticketRepository) {
+    public CrmService(CrewRepository crewRepository, TrainRepository trainRepository, PassportRepository passportRepository, TicketRepository ticketRepository, RaceRepository raceRepository) {
         this.crewRepository = crewRepository;
         this.trainRepository = trainRepository;
         this.passportRepository = passportRepository;
         this.ticketRepository = ticketRepository;
+        this.raceRepository = raceRepository;
     }
 
     public List<Crew> findAllCrew(String filterText) {
@@ -47,6 +43,13 @@ public class CrmService {
             return passportRepository.search(filterText);
     }
 
+    public List<Race> findAllRace(String filterText) {
+        if (filterText == null || filterText.isEmpty())
+            return raceRepository.findAll();
+        else
+            return raceRepository.search(filterText);
+    }
+
     public long countCrew() {
         return crewRepository.count();
     }
@@ -65,6 +68,14 @@ public class CrmService {
             return;
         }
         trainRepository.delete(train);
+    }
+
+    public void deleteRace(Race race) {
+        if (race == null) {
+            System.err.println("[delete] Race is null.");
+            return;
+        }
+        raceRepository.delete(race);
     }
 
     public void deletePassport(Passport passport) {
@@ -91,6 +102,14 @@ public class CrmService {
         trainRepository.save(train);
     }
 
+    public void saveRace(Race race) {
+        if (race == null) {
+            System.err.println("[save] Race is null.");
+            return;
+        }
+        raceRepository.save(race);
+    }
+
     public void savePassport(Passport passport) {
         if (passport == null) {
             System.err.println("[save] Passport is null.");
@@ -110,6 +129,9 @@ public class CrmService {
     }
     public List<Ticket> findAllTicket() {
         return ticketRepository.findAll();
+    }
+    public List<Race> findAllRace() {
+        return raceRepository.findAll();
     }
 
 }

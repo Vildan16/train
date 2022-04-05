@@ -1,7 +1,9 @@
 package com.example.application.data.entity;
 
 import com.example.application.data.AbstractEntity;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import net.bytebuddy.dynamic.loading.InjectionClassLoader;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -15,6 +17,9 @@ public class Ticket extends AbstractEntity {
     private long number;
 
     @ManyToOne
+    @JoinColumn(name = "race_id")
+    @JsonIgnoreProperties({"races"})
+    @Nullable
     private Race race;
 
     @OneToOne
@@ -57,11 +62,12 @@ public class Ticket extends AbstractEntity {
         this.number = number;
     }
 
+    @Nullable
     public Race getRace() {
         return race;
     }
 
-    public void setRace(Race race) {
+    public void setRace(@Nullable Race race) {
         this.race = race;
     }
 
@@ -136,4 +142,6 @@ public class Ticket extends AbstractEntity {
     public void setPrice(long price) {
         this.price = price;
     }
+
+
 }

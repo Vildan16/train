@@ -31,7 +31,10 @@ public class LoginView extends VerticalLayout {
         button.addClickListener(e -> {
             this.currentUser = textFieldLogin.getValue();
             System.out.println(currentUser);
-            getUI().ifPresent(ui -> ui.navigate(MenuView.class));
+            if (currentUser.equals("admin"))
+                getUI().ifPresent(ui -> ui.navigate(AdminLayout.class));
+            else
+                getUI().ifPresent(ui -> ui.navigate(MenuView.class));
         });
         this.setAlignItems(Alignment.CENTER);
         add(new H4("Авторизация"), textFieldLogin, new PasswordField("Пароль"),

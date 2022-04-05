@@ -9,6 +9,8 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.LinkedList;
+import java.util.List;
 
 @Entity
 public class Race extends AbstractEntity {
@@ -23,9 +25,11 @@ public class Race extends AbstractEntity {
 
     @ManyToOne
     @JoinColumn(name = "train_id")
-    @JsonIgnoreProperties({"races"})
     @Nullable
     private Train train;
+
+    @OneToMany(mappedBy = "race")
+    private List<Ticket> tickets = new LinkedList<>();
 
 
     public String getFrom() {
@@ -52,4 +56,14 @@ public class Race extends AbstractEntity {
     public void setTrain(@Nullable Train train) {
         this.train = train;
     }
+
+    public List<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(List<Ticket> tickets) {
+        this.tickets = tickets;
+    }
+
+
 }

@@ -21,6 +21,9 @@ public class Train extends AbstractEntity {
     @OneToMany(mappedBy = "train")
     private List<Crew> crewMembers = new LinkedList<>();
 
+    @OneToMany(mappedBy = "train")
+    private List<Race> races = new LinkedList<>();
+
     @OneToOne(orphanRemoval=true)
     @JoinColumn(name = "crew_id")
     @Nullable
@@ -71,5 +74,13 @@ public class Train extends AbstractEntity {
     public Train(String title, String trainNumber) {
         this.title = title;
         this.trainNumber = trainNumber;
+    }
+
+    public List<Race> getRaces() {
+        return races;
+    }
+
+    public void setRaces(List<Race> races) {
+        this.races = races;
     }
 }
