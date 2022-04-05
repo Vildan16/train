@@ -22,8 +22,8 @@ import java.util.List;
 public class RaceForm extends FormLayout {
     Binder<Race> binder = new BeanValidationBinder<>(Race.class);
 
-    TextField from = new TextField("Место отправления");
-    TextField to = new TextField("Место прибытия");
+    TextField placeFrom = new TextField("Место отправления");
+    TextField placeTo = new TextField("Место прибытия");
     ComboBox<Train> train = new ComboBox<>("Поезд");
 
     Button saveButton = new Button("Сохранить");
@@ -39,8 +39,8 @@ public class RaceForm extends FormLayout {
         train.setItemLabelGenerator(Train::getTitle);
 
         add(
-                from,
-                to,
+                placeFrom,
+                placeTo,
                 train,
                 createButtonLayout()
         );

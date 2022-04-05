@@ -16,36 +16,30 @@ import java.util.List;
 public class Race extends AbstractEntity {
 
     @NotNull
-    @NotEmpty
-    private String from;
+    private String placeFrom;
 
     @NotNull
-    @NotEmpty
-    private String to;
+    private String placeTo;
 
     @ManyToOne
     @JoinColumn(name = "train_id")
-    @Nullable
     private Train train;
 
-    @OneToMany(mappedBy = "race")
-    private List<Ticket> tickets = new LinkedList<>();
 
-
-    public String getFrom() {
-        return from;
+    public String getPlaceFrom() {
+        return placeFrom;
     }
 
-    public void setFrom(String from) {
-        this.from = from;
+    public void setPlaceFrom(String placeFrom) {
+        this.placeFrom = placeFrom;
     }
 
-    public String getTo() {
-        return to;
+    public String getPlaceTo() {
+        return placeTo;
     }
 
-    public void setTo(String to) {
-        this.to = to;
+    public void setPlaceTo(String placeTo) {
+        this.placeTo = placeTo;
     }
 
     @Nullable
@@ -56,14 +50,5 @@ public class Race extends AbstractEntity {
     public void setTrain(@Nullable Train train) {
         this.train = train;
     }
-
-    public List<Ticket> getTickets() {
-        return tickets;
-    }
-
-    public void setTickets(List<Ticket> tickets) {
-        this.tickets = tickets;
-    }
-
 
 }

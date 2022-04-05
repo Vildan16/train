@@ -96,7 +96,7 @@ class RaceView extends VerticalLayout {
     private void configureGrid() {
         grid.setSizeFull();
 
-        grid.setColumns("from", "to");
+        grid.setColumns("placeFrom", "placeTo");
         grid.getColumns().get(0).setHeader("От");
         grid.getColumns().get(1).setHeader("До");
         grid.addColumn(race -> race.getTrain() != null ? race.getTrain().getTitle() : "-").setHeader("Поезд");

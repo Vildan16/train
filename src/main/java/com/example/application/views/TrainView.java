@@ -13,7 +13,7 @@ import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
-@Route(value = "train", layout = MainLayout.class)
+@Route(value = "train", layout = AdminLayout.class)
 @PageTitle("Поезда")
 class TrainView extends VerticalLayout {
     Grid<Train> grid = new Grid<>(Train.class);

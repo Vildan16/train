@@ -15,7 +15,7 @@ import com.vaadin.flow.router.Route;
 
 import java.util.Collections;
 
-@Route(value = "crew", layout = MainLayout.class)
+@Route(value = "crew", layout = AdminLayout.class)
 @PageTitle("Работники")
 public class CrewView extends VerticalLayout {
     Grid<Crew> grid = new Grid<>(Crew.class);

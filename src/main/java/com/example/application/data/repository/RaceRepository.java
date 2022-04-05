@@ -11,7 +11,7 @@ import org.springframework.data.repository.query.Param;
 public interface RaceRepository extends JpaRepository<Race, Long> {
 
     @Query("select c from Race c " +
-            "where lower(c.from) like lower(concat('%', :searchTerm, '%')) " +
-            "or lower(c.to) like lower(concat('%', :searchTerm, '%'))")
+            "where lower(c.placeFrom) like lower(concat('%', :searchTerm, '%')) " +
+            "or lower(c.placeTo) like lower(concat('%', :searchTerm, '%'))")
     List<Race> search(@Param("searchTerm") String searchTerm);
 }

@@ -90,8 +90,8 @@ public class MenuView extends VerticalLayout {
 
     private void configureGrid() {
         grid.setColumns();
-        grid.addColumn(ticket -> ticket.getRace().getFrom() != null ? ticket.getRace().getFrom() : "-").setHeader("От");
-        grid.addColumn(ticket -> ticket.getRace().getTo() != null ? ticket.getRace().getTo() : "-").setHeader("До");
+        grid.addColumn(ticket -> ticket.getRace().getPlaceFrom() != null ? ticket.getRace().getPlaceFrom() : "-").setHeader("От");
+        grid.addColumn(ticket -> ticket.getRace().getPlaceTo() != null ? ticket.getRace().getPlaceTo() : "-").setHeader("До");
         grid.addColumn(Ticket::getDateFrom).setHeader("Дата отправления");
         grid.addColumn(Ticket::getDateTo).setHeader("Дата отправления");
         grid.addColumn(Ticket::getTimeFrom).setHeader("Дата отправления");
