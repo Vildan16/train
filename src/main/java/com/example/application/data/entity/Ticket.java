@@ -23,6 +23,10 @@ public class Ticket extends AbstractEntity {
     @Nullable
     private Race race;
 
+    @ManyToOne
+    @Nullable
+    private Passport owner;
+
 
     @Column(columnDefinition = "DATE")
     private LocalDate dateFrom;
@@ -45,6 +49,9 @@ public class Ticket extends AbstractEntity {
     private long price;
 
     private long kassaNumber;
+
+    public Ticket() {
+    }
 
     public long getNumber() {
         return number;
@@ -134,5 +141,14 @@ public class Ticket extends AbstractEntity {
 
     public void setKassaNumber(long kassaNumber) {
         this.kassaNumber = kassaNumber;
+    }
+
+    @Nullable
+    public Passport getOwner() {
+        return owner;
+    }
+
+    public void setOwner(@Nullable Passport owner) {
+        this.owner = owner;
     }
 }

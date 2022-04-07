@@ -41,8 +41,7 @@ public class KassaLayout extends AppLayout {
         Tabs tabs = new Tabs();
         tabs.add(
                 createTab(VaadinIcon.LIST, "Добавить билеты", RaceKassaView.class),
-                createTab(VaadinIcon.LIST, "Билеты в продаже", TicketKassaView.class),
-                createTab(VaadinIcon.FILE, "Документы", PassportView.class)
+                createTab(VaadinIcon.LIST, "Билеты в продаже", TicketKassaView.class)
         );
         tabs.setOrientation(Tabs.Orientation.VERTICAL);
         return tabs;

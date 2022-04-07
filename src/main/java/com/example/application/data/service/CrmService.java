@@ -130,6 +130,10 @@ public class CrmService {
         ticketRepository.save(ticket);
     }
 
+    public List<Ticket> findAllTicketWhereOwnerNull() {
+        return ticketRepository.findAllByOwnerIsNull();
+    }
+
     public Kassa findKassaByNumber(long number) {
         return kassaRepository.findByNumber(number);
     }
@@ -145,6 +149,9 @@ public class CrmService {
     }
     public List<Ticket> findAllTicket() {
         return ticketRepository.findAll();
+    }
+    public List<Ticket> findAllTicketWhereOwnerIsNotNull() {
+        return ticketRepository.findAllByOwnerIsNotNull();
     }
     public List<Race> findAllRace() {
         return raceRepository.findAll();
