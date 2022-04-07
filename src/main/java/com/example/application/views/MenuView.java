@@ -113,9 +113,9 @@ public class MenuView extends VerticalLayout {
         grid.addColumn(ticket -> ticket.getRace().getPlaceFrom() != null ? ticket.getRace().getPlaceFrom() : "-").setHeader("От");
         grid.addColumn(ticket -> ticket.getRace().getPlaceTo() != null ? ticket.getRace().getPlaceTo() : "-").setHeader("До");
         grid.addColumn(Ticket::getDateFrom).setHeader("Дата отправления");
-        grid.addColumn(Ticket::getDateTo).setHeader("Дата отправления");
-        grid.addColumn(Ticket::getTimeFrom).setHeader("Дата отправления");
-        grid.addColumn(Ticket::getTimeTo).setHeader("Дата отправления");
+        grid.addColumn(Ticket::getDateTo).setHeader("Дата прибытия");
+        grid.addColumn(Ticket::getTimeFrom).setHeader("Время отправления");
+        grid.addColumn(Ticket::getTimeTo).setHeader("Время прибытия");
         grid.addColumn(Ticket::getPrice).setHeader("Цена");
         grid.getColumns().forEach(col -> col.setAutoWidth(true));
         grid.addSelectionListener(selection -> {

@@ -23,7 +23,7 @@ public class Ticket extends AbstractEntity {
     @Nullable
     private Race race;
 
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.ALL)
     @Nullable
     private Passport owner;
 
