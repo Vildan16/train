@@ -2,18 +2,10 @@ package com.example.application.views;
 
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.H4;
-import com.vaadin.flow.component.login.LoginForm;
-import com.vaadin.flow.component.login.LoginI18n;
-import com.vaadin.flow.component.login.LoginOverlay;
-import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.router.Router;
-import com.vaadin.flow.router.RouterLink;
-import org.atmosphere.interceptor.AtmosphereResourceStateRecovery;
 
 @Route("")
 public class LoginView extends VerticalLayout {
@@ -32,7 +24,9 @@ public class LoginView extends VerticalLayout {
             this.currentUser = textFieldLogin.getValue();
             System.out.println(currentUser);
             if (currentUser.equals("admin"))
-                getUI().ifPresent(ui -> ui.navigate(AdminLayout.class));
+                getUI().ifPresent(ui -> ui.navigate(TrainView.class));
+            else if (currentUser.startsWith("kassa"))
+                getUI().ifPresent(ui -> ui.navigate(RaceKassaView.class));
             else
                 getUI().ifPresent(ui -> ui.navigate(MenuView.class));
         });

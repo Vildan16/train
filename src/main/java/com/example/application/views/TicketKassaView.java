@@ -9,21 +9,20 @@ import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.H2;
-import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
-@Route(value = "ticket", layout = MainLayout.class)
+@Route(value = "ticketKassa", layout = KassaLayout.class)
 @PageTitle("Поезда")
-class TicketView extends VerticalLayout {
+class TicketKassaView extends VerticalLayout {
     Grid<Ticket> grid = new Grid<>(Ticket.class);
     CrmService service;
     Dialog dialogBuyTicket = new Dialog();
 
-    TicketView(CrmService service) {
+    TicketKassaView(CrmService service) {
         this.service = service;
         VerticalLayout dialogLayout = createDialogLayout(dialogBuyTicket);
         dialogBuyTicket.add(dialogLayout);
@@ -52,7 +51,7 @@ class TicketView extends VerticalLayout {
         HorizontalLayout buttonLayout = new HorizontalLayout(cancelButton,
                 saveButton);
         buttonLayout
-                .setJustifyContentMode(FlexComponent.JustifyContentMode.END);
+                .setJustifyContentMode(JustifyContentMode.END);
         buttonLayout.getStyle().set("margin-top", "var(--lumo-space-m)");
 
         VerticalLayout dialogLayout = new VerticalLayout(
@@ -66,7 +65,7 @@ class TicketView extends VerticalLayout {
                 buttonLayout);
         dialogLayout.setPadding(false);
         dialogLayout.setSpacing(false);
-        dialogLayout.setAlignItems(FlexComponent.Alignment.STRETCH);
+        dialogLayout.setAlignItems(Alignment.STRETCH);
         dialogLayout.getStyle().set("width", "18rem").set("max-width", "100%");
 
         return dialogLayout;
@@ -77,9 +76,10 @@ class TicketView extends VerticalLayout {
     }
 
     private Component getToolBar() {
-        Button buyTicketButton = new Button("Купить билет", e -> dialogBuyTicket.open());
+       // Button buyTicketButton = new Button("Купить билет", e -> dialogBuyTicket.open());
 
-        HorizontalLayout toolbar = new HorizontalLayout(buyTicketButton);
+        //HorizontalLayout toolbar = new HorizontalLayout(buyTicketButton);
+        HorizontalLayout toolbar = new HorizontalLayout();
         return toolbar;
     }
 

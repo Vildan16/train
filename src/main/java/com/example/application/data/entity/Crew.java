@@ -31,10 +31,6 @@ public class Crew extends AbstractEntity {
     @Nullable
     private Train train;
 
-    @OneToOne
-    @JoinColumn(name = "pasport_id")
-    private Passport passport;
-
     public String getFirstName() {
         return firstName;
     }

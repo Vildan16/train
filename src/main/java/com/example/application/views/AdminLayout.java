@@ -42,8 +42,7 @@ public class AdminLayout extends AppLayout {
         tabs.add(
                 createTab(VaadinIcon.TRAIN, "Поезда", TrainView.class),
                 createTab(VaadinIcon.FILE, "Рейсы", RaceView.class),
-                createTab(VaadinIcon.USERS, "Экипаж", CrewView.class),
-                createTab(VaadinIcon.FILE, "Документы", PassportView.class)
+                createTab(VaadinIcon.USERS, "Экипаж", CrewView.class)
         );
         tabs.setOrientation(Tabs.Orientation.VERTICAL);
         return tabs;

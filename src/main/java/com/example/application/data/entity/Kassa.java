@@ -4,17 +4,20 @@ import com.example.application.data.AbstractEntity;
 
 import javax.annotation.Nullable;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotEmpty;
+import java.util.List;
 
 @Entity
 public class Kassa extends AbstractEntity {
     @NotEmpty
     private long number = 0;
 
-    @OneToOne
+    @OneToMany
     @Nullable
-    private Ticket ticket;
+    private List<Ticket> tickets;
 
 
     public long getNumber() {
@@ -26,11 +29,11 @@ public class Kassa extends AbstractEntity {
     }
 
     @Nullable
-    public Ticket getTicket() {
-        return ticket;
+    public List<Ticket> getTickets() {
+        return tickets;
     }
 
-    public void setTicket(@Nullable Ticket ticket) {
-        this.ticket = ticket;
+    public void setTickets(@Nullable List<Ticket> tickets) {
+        this.tickets = tickets;
     }
 }

@@ -14,7 +14,7 @@ import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
-@Route(value = "passport", layout = AdminLayout.class)
+@Route(value = "passport", layout = KassaLayout.class)
 @PageTitle("Документы")
 class PassportView extends VerticalLayout {
     Grid<Passport> grid = new Grid<>(Passport.class);

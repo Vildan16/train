@@ -2,6 +2,7 @@ package com.example.application.data.service;
 
 import com.example.application.data.entity.*;
 import com.example.application.data.repository.*;
+import net.bytebuddy.description.annotation.AnnotationValue;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,13 +14,16 @@ public class CrmService {
     private final PassportRepository passportRepository;
     private final TicketRepository ticketRepository;
     private final RaceRepository raceRepository;
+    private final KassaRepository kassaRepository;
 
-    public CrmService(CrewRepository crewRepository, TrainRepository trainRepository, PassportRepository passportRepository, TicketRepository ticketRepository, RaceRepository raceRepository) {
+
+    public CrmService(CrewRepository crewRepository, TrainRepository trainRepository, PassportRepository passportRepository, TicketRepository ticketRepository, RaceRepository raceRepository, KassaRepository kassaRepository) {
         this.crewRepository = crewRepository;
         this.trainRepository = trainRepository;
         this.passportRepository = passportRepository;
         this.ticketRepository = ticketRepository;
         this.raceRepository = raceRepository;
+        this.kassaRepository = kassaRepository;
     }
 
     public List<Crew> findAllCrew(String filterText) {
@@ -116,6 +120,18 @@ public class CrmService {
             return;
         }
         passportRepository.save(passport);
+    }
+
+    public void saveTicket(Ticket ticket) {
+        if (ticket == null) {
+            System.err.println("[save] Ticket is null.");
+            return;
+        }
+        ticketRepository.save(ticket);
+    }
+
+    public Kassa findKassaByNumber(long number) {
+        return kassaRepository.findByNumber(number);
     }
 
     public List<Train> findAllTrain() {

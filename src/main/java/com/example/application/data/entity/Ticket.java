@@ -7,6 +7,7 @@ import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -22,37 +23,28 @@ public class Ticket extends AbstractEntity {
     @Nullable
     private Race race;
 
-    @OneToOne
-    private Kassa kassa;
 
-
-    @NotEmpty
     @Column(columnDefinition = "DATE")
     private LocalDate dateFrom;
 
-    @NotEmpty
     @Column(columnDefinition = "DATE")
     private LocalDate dateTo;
 
-    @NotEmpty
     @Column(columnDefinition = "TIME")
     private LocalTime timeFrom;
 
-    @NotEmpty
     @Column(columnDefinition = "TIME")
     private LocalTime timeTo;
 
-    @NotEmpty
     private long wagonNumber;
 
-    @NotEmpty
     private long seatNumber;
 
-    @NotEmpty
     private String class_;
 
-    @NotEmpty
     private long price;
+
+    private long kassaNumber;
 
     public long getNumber() {
         return number;
@@ -71,13 +63,6 @@ public class Ticket extends AbstractEntity {
         this.race = race;
     }
 
-    public Kassa getKassa() {
-        return kassa;
-    }
-
-    public void setKassa(Kassa kassa) {
-        this.kassa = kassa;
-    }
 
     public LocalDate getDateFrom() {
         return dateFrom;
@@ -143,5 +128,11 @@ public class Ticket extends AbstractEntity {
         this.price = price;
     }
 
+    public long getKassaNumber() {
+        return kassaNumber;
+    }
 
+    public void setKassaNumber(long kassaNumber) {
+        this.kassaNumber = kassaNumber;
+    }
 }

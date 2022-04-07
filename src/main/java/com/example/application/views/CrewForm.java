@@ -42,15 +42,11 @@ public class CrewForm extends FormLayout {
         train.setItems(trains);
         train.setItemLabelGenerator(Train::getTitle);
 
-        passport.setItems(passports);
-        passport.setItemLabelGenerator(Passport::getNumber);
-
         add(
                 firstName,
                 lastName,
                 thirdName,
                 train,
-                passport,
                 createButtonLayout()
         );
     }
